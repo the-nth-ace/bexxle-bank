@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "types": ["reflect-metadata", "jest", "node"],
     "baseUrl": ".",
     "paths": {
       "@common/*": ["src/common/*"],

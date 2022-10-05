@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 export enum AccountType {
   CURRENT = "current",
@@ -6,38 +6,46 @@ export enum AccountType {
 }
 
 export interface IAccount {
-  id: string
-  number: number
-  type: AccountType
-  balance: number
-  isActive: boolean
-  createdAt: Date
+  id: string;
+  number: string;
+  type: AccountType | string;
+  balance: number;
+  isActive: boolean;
+  createdAt: Date;
+}
+
+export class AccountCreateDTO {
+  number: string;
+  type: AccountType;
 }
 
 @Entity()
 export class Account implements IAccount {
   @PrimaryGeneratedColumn("uuid")
-  id: string
+  id: string;
 
   @Column()
-  number: number
+  number: string;
 
   @Column({
     type: "enum",
     enum: AccountType,
     default: AccountType.SAVINGS,
   })
-  type: AccountType
+  type: string;
 
-  @Column()
-  balance: number
+  @Column({
+    type: "float",
+    default: 0,
+  })
+  balance: number;
 
-  @Column()
-  isActive: boolean
+  @Column({ type: "boolean", default: false })
+  isActive: boolean;
 
   @Column({
     type: "date",
     default: new Date(Date.now()),
   })
-  createdAt: Date
+  createdAt: Date;
 }
